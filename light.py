@@ -122,28 +122,13 @@ def _binary_light(leds, np, value):
     very_low_light, low_light, high_light = color_picker(random_color())
 
     erase_all(leds, np)
-
-    binary_representation = _binary_convert(value)
+    binary_representation = [x for x in "{0:b}".format(value)]
     binary_representation.reverse()
     for led, value in enumerate(binary_representation):
-        if value == 1:
+        if value == "1":
             np[led] = high_light
 
     np.write()
-
-
-def _binary_convert(x):
-    res = []
-    while x > 0:
-        if x % 2 == 0:
-            res.append(0)
-            x /= 2
-        else:
-            x -= 1
-            x /= 2
-            res.append(1)
-    res.reverse()
-    return res
 
 
 # ## Increase
